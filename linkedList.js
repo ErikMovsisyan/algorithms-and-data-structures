@@ -86,7 +86,7 @@ let list = new SingleLinkLIst([1,2]);
 console.log(list.head);
 //.clear();
 
-console.log(list.at(0));
+console.log(list.at(0));//
 
 
 
