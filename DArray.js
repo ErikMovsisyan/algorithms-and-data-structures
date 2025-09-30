@@ -36,7 +36,7 @@ class DArray {
         return this.#arr[0];
     }
     back() {
-        this.#arr[this.size - 1];
+         return this.#arr[this.size - 1];
     }
     toArray() {
         return this.#arr.slice(0,this.#size - 1)
@@ -107,20 +107,93 @@ class DArray {
             }
         }
     }
-}
+    swap(i,j) {
+        [this.#arr[i],this.#arr[j]] = [this.#arr[j],this.#arr[i]];
+    }
+    values() {
+        let arr = [];
+        for (let i = 0; i < this.#size; ++i) {
+            arr.push(this.#arr[i]);
+        }
+        return arr;
+    }
+    keys() {
+        let arr = [];
+        for(let i = 0; i < this.#size; ++i) {
+            arr.push(i);
+        }
+        return arr;
+    }
+    entries() {
+        let arr = [];
+        arr.push(this.keys());
+        arr.push(this.values())
+        return arr;
+    }
+    myforEach(fn) {
+        if (typeof fn !== 'function') {
+            throw new Error("fn is not a function");
+        }
+        for (let i = 0; i < this.#size; ++i) {
+            fn(this.#arr[i],i,this);
+            }
+        }
+        myMap(fn) {
+            let newarr = [];
+             if (typeof fn !== 'function') {
+                    throw new Error("fn is not a function");
+        }
+                 for (let i = 0; i < this.#size; ++i) {
+                    newarr.push(fn(this.#arr[i],i,this));
+            }
+            return newarr;
+        }
+        filter(fn) {
+            let newArr = [];
+            if (typeof fn !== 'function') {
+                throw new Error("fn is not a function");
+            }
+            for (let i = 0; i < this.#size; ++i) {
+                if (fn(this.#arr[i],i,this)) {
+                    newArr.push(this.#arr[i]);
+                }
+            }
+            return newArr;
+        }
+        some(fn) {
+             let bool = false;
+                for(let i = 0; i < this.#size; i++) {
+                    if(fn(this.#arr[i],i,arr))  {
+                        bool = true;
+                    }
+                }
+            return bool;
+        }
+        every(fn) {
+        let bool = true;
+                for(let i = 0; i < this.#size; i++) {
+                    if(!fn(this.#arr[i],i,arr))  {
+                        bool = false;
+                    }
+                }
+            return bool;
+        }
+    }
+
 let arr = new DArray(4)
 arr.push_back(3);
 arr.push_back(5);
 arr.push_back(6);
 arr.push_back(7);
-console.log(...arr);
+/*console.log(...arr);
 
 
 arr.popBack()
 console.log(...arr);
 
 arr.insert(2,15);
-console.log(...arr);
+console.log(...arr);*/
+console.log(arr.every((val) => val > 6))
 
 
 
